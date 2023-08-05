@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
     "ant-design-vue": "4.x",
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.1",
     "sass": "^1.64.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",

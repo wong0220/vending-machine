@@ -3,7 +3,8 @@
 https://shimmering-croissant-e3d1dd.netlify.app
 
 # 플로우차트
-[자판기 순서도.pdf](https://github.com/wong0220/vending-machine/files/12266869/default.pdf)
+[자판기 순서도.pdf](https://github.com/wong0220/vending-machine/files/12266870/default.pdf)
+
 
 # 추가한 전제 조건
 

@@ -21,10 +21,14 @@
         </div>
       </div>
       <div class="section small">
-        <div style="width: 100px">
-          <div><strong>지불 종류:</strong> {{ inputAmount.type }}</div>
+        <div class="input-amount-info-box">
           <div>
-            <strong>잔액:</strong> {{ inputAmount.amount.toLocaleString() }}원
+            <strong>지불 종류:</strong>
+            {{ inputAmount.type }}
+          </div>
+          <div>
+            <strong>잔액:</strong>
+            {{ inputAmount.amount.toLocaleString() }}원
           </div>
         </div>
 
@@ -33,31 +37,37 @@
             <a-radio-group
               v-model:value="configuredInfo.type"
               :options="paymentForm"
-              style="display: flex"
+              class="type-box"
             />
             <input
-              type="text"
               v-model="configuredInfo.amount"
-              :disabled="configuredInfo.type === 'CARD'"
-              :class="{ disabled: configuredInfo.type === 'CARD' }"
               @input="onInput"
               @keyup.enter="
                 setInputAmount(configuredInfo.type, configuredInfo.amount)
               "
+              type="text"
+              :disabled="configuredInfo.type === 'CARD'"
+              :class="{ disabled: configuredInfo.type === 'CARD' }"
             />
           </div>
           <div class="btn-wrapper">
             <a-button
-              type="primary"
-              size="large"
               @click="
                 setInputAmount(configuredInfo.type, configuredInfo.amount)
               "
-              >투입하기</a-button
+              type="primary"
+              size="large"
             >
-            <a-button type="primary" size="large" danger @click="returnChange()"
-              >반환하기</a-button
+              투입하기
+            </a-button>
+            <a-button
+              @click="returnChange()"
+              type="primary"
+              size="large"
+              danger
             >
+              반환하기
+            </a-button>
           </div>
         </div>
       </div>
@@ -73,8 +83,8 @@ import {
   NotificationMsg,
   PaymentType,
   Beverage,
-} from "@interface/vendingMachine.ts";
-import BeverageItem from "@components/BeverageItem.vue";
+} from "../interface/vendingMachine.ts";
+import BeverageItem from "../components/BeverageItem.vue";
 
 const openNotificationWithIcon = (type: NotificationMsg, message: string) => {
   notification[type]({
@@ -93,15 +103,15 @@ const initConfiguredInfo = () => {
 };
 
 const beverageStock = reactive({
-  콜라: {
+  COKE: {
     stock: 10,
     price: 1100,
   },
-  물: {
+  WATER: {
     stock: 10,
     price: 600,
   },
-  커피: {
+  COFFEE: {
     stock: 10,
     price: 700,
   },
@@ -135,9 +145,9 @@ const returnChange = () => {
 
 const totalStock = computed(
   () =>
-    beverageStock.콜라.stock +
-    beverageStock.물.stock +
-    beverageStock.커피.stock,
+    beverageStock.COKE.stock +
+    beverageStock.WATER.stock +
+    beverageStock.COFFEE.stock,
 );
 // 투입금액 설정 시 결제수단의 'type'과 금액의 'amount'를 인자로 넘겨줘야 한다.
 const setInputAmount = (type: PaymentType, amount: number) => {
@@ -264,6 +274,10 @@ watch(
       align-items: center;
       gap: 20px;
 
+      .input-amount-info-box {
+        width: 100px;
+      }
+
       .beverage-box {
         display: flex;
         flex-direction: column;
@@ -281,6 +295,10 @@ watch(
           display: flex;
           flex-direction: column;
           gap: 10px;
+
+          .type-box {
+            display: flex;
+          }
 
           .disabled {
             cursor: not-allowed;

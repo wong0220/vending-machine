@@ -73,8 +73,8 @@ import {
   NotificationMsg,
   PaymentType,
   Beverage,
-} from "../interface/vendingMachine.ts";
-import BeverageItem from "../components/BeverageItem.vue";
+} from "@interface/vendingMachine.ts";
+import BeverageItem from "@components/BeverageItem.vue";
 
 const openNotificationWithIcon = (type: NotificationMsg, message: string) => {
   notification[type]({

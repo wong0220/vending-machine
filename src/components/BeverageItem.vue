@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { QuestionCircleTwoTone } from "@ant-design/icons-vue";
-import { Beverage } from "../interface/vendingMachine";
+import { Beverage } from "@interface/vendingMachine";
 
 defineProps<{
   info: { price: number; stock: number };
@@ -26,7 +26,7 @@ defineProps<{
 }>();
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .beverage-box {
   display: flex;
   flex-direction: column;

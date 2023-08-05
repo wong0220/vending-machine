@@ -127,7 +127,7 @@ const returnChange = () => {
   inputAmount.type = "";
   openNotificationWithIcon(
     "success",
-    `${change.toLocaleString()}원이 반환되었습니다.`
+    `${change.toLocaleString()}원이 반환되었습니다.`,
   );
 
   initConfiguredInfo();
@@ -135,7 +135,9 @@ const returnChange = () => {
 
 const totalStock = computed(
   () =>
-    beverageStock.콜라.stock + beverageStock.물.stock + beverageStock.커피.stock
+    beverageStock.콜라.stock +
+    beverageStock.물.stock +
+    beverageStock.커피.stock,
 );
 // 투입금액 설정 시 결제수단의 'type'과 금액의 'amount'를 인자로 넘겨줘야 한다.
 const setInputAmount = (type: PaymentType, amount: number) => {
@@ -213,7 +215,7 @@ watch(
       return;
     }
     configuredInfo.amount = 0;
-  }
+  },
 );
 
 watch(
@@ -222,12 +224,12 @@ watch(
     if (totalStock.value === 0) {
       openNotificationWithIcon(
         "warning",
-        `자판기에 남아이있는 음료수 재고가 없습니다.`
+        `자판기에 남아이있는 음료수 재고가 없습니다.`,
       );
 
       returnChange();
     }
-  }
+  },
 );
 </script>
 

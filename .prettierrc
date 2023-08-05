@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:prettier/recommended"],
+  "rules": {
+    "semi": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "htmlWhitespaceSensitivity": "ignore",
+    "singleAttributePerLine": true,
+    "bracketSpacing": true
+  }
+}

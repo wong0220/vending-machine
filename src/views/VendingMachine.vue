@@ -23,6 +23,10 @@
       <div class="section small">
         <div class="input-amount-info-box">
           <div>
+            <strong>남은 시간:</strong>
+            00:{{ remainingTime < 10 ? `0${remainingTime}` : remainingTime }}
+          </div>
+          <div>
             <strong>지불 종류:</strong>
             {{ inputAmount.type }}
           </div>
@@ -76,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from "vue";
+import { computed, onUnmounted, reactive, ref, watch } from "vue";
 import { notification } from "ant-design-vue";
 import {
   PaymentInfo,
@@ -131,6 +135,8 @@ const returnChange = () => {
     openNotificationWithIcon("error", "반환할 금액이 없습니다.");
     return;
   }
+  remainingTime.value = 0;
+
   possessionAmount[inputAmount.type] += inputAmount.amount;
 
   const change = inputAmount.amount;
@@ -143,6 +149,25 @@ const returnChange = () => {
 
   initConfiguredInfo();
 };
+
+let timer: number | undefined;
+const remainingTime = ref(0);
+const initTimer = () => {
+  clearInterval(timer);
+  timer = undefined;
+};
+watch(
+  () => remainingTime.value,
+  () => {
+    if (remainingTime.value === 0) {
+      initTimer();
+
+      if (totalStock.value === 0 || inputAmount.amount === 0) return;
+
+      returnChange();
+    }
+  },
+);
 
 const totalStock = computed(
   () =>
@@ -185,6 +210,13 @@ const setInputAmount = (type: PaymentType, amount: number) => {
     returnChange();
   }
 
+  remainingTime.value = 20;
+  if (!timer) {
+    timer = setInterval(() => {
+      remainingTime.value -= 1;
+    }, 1000);
+  }
+
   possessionAmount[type] -= amount;
   inputAmount.type = type;
   inputAmount.amount += amount;
@@ -192,6 +224,10 @@ const setInputAmount = (type: PaymentType, amount: number) => {
 };
 
 const pickBeverage = (beverage: Beverage) => {
+  if (remainingTime.value > 0) {
+    remainingTime.value = 20;
+  }
+
   if (beverageStock[beverage].price > inputAmount.amount) {
     openNotificationWithIcon("error", "잔액이 부족합니다");
     return;
@@ -210,6 +246,9 @@ const pickBeverage = (beverage: Beverage) => {
 
   if (inputAmount.amount === 0) {
     inputAmount.type = "";
+
+    remainingTime.value = 0;
+    initTimer();
   }
   openNotificationWithIcon(
     "success",
@@ -248,6 +287,10 @@ watch(
     }
   },
 );
+
+onUnmounted(() => {
+  initTimer();
+});
 </script>
 
 <style scoped lang="scss">

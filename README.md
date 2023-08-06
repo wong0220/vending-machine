@@ -4,7 +4,7 @@ https://shimmering-croissant-e3d1dd.netlify.app
 
 # 플로우차트
 
-[자판기 순서도.pdf](https://github.com/wong0220/vending-machine/files/12266870/default.pdf)
+[자판기 플로우차트.pdf](https://github.com/wong0220/vending-machine/files/12269925/default.pdf)
 
 # 경우의 수
 ### 음료 선택 시

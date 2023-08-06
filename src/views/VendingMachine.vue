@@ -85,6 +85,7 @@ import {
   Beverage,
 } from "../interface/vendingMachine.ts";
 import BeverageItem from "../components/BeverageItem.vue";
+import { CONVERTED_TO_KOR } from "../constants/string";
 
 const openNotificationWithIcon = (type: NotificationMsg, message: string) => {
   notification[type]({
@@ -197,7 +198,10 @@ const pickBeverage = (beverage: Beverage) => {
   }
 
   if (beverageStock[beverage].stock === 0) {
-    openNotificationWithIcon("error", `남아있는 ${beverage} 재고가 없습니다.`);
+    openNotificationWithIcon(
+      "error",
+      `남아있는 ${CONVERTED_TO_KOR[beverage]} 재고가 없습니다.`,
+    );
     return;
   }
 
@@ -207,7 +211,10 @@ const pickBeverage = (beverage: Beverage) => {
   if (inputAmount.amount === 0) {
     inputAmount.type = "";
   }
-  openNotificationWithIcon("success", `${beverage} 제품이 나왔습니다.`);
+  openNotificationWithIcon(
+    "success",
+    `${CONVERTED_TO_KOR[beverage]} 제품이 나왔습니다.`,
+  );
   return;
 };
 

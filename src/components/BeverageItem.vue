@@ -2,7 +2,7 @@
   <div class="beverage-box">
     <QuestionCircleTwoTone :style="{ fontSize: '50px' }" />
     <div>
-      <strong>{{ convertedName[name] }}</strong>
+      <strong>{{ CONVERTED_TO_KOR[name] }}</strong>
     </div>
     <div>
       <strong> 가격 : </strong>
@@ -21,12 +21,7 @@
 <script setup lang="ts">
 import { QuestionCircleTwoTone } from "@ant-design/icons-vue";
 import { Beverage, ProductInfo } from "../interface/vendingMachine";
-
-const convertedName = {
-  COKE: "콜라",
-  WATER: "물",
-  COFFEE: "커피",
-};
+import { CONVERTED_TO_KOR } from "../constants/string";
 
 defineProps<{
   info: ProductInfo;

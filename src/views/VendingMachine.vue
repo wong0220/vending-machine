@@ -205,7 +205,7 @@ const pickBeverage = (beverage: Beverage) => {
   beverageStock[beverage].stock -= 1;
 
   if (inputAmount.amount === 0) {
-    initConfiguredInfo();
+    inputAmount.type = "";
   }
   openNotificationWithIcon("success", `${beverage} 제품이 나왔습니다.`);
   return;
